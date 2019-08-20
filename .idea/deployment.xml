@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="On explicit save action" serverName="bazarAWS" autoUploadExternalChanges="true">
     <serverData>
+      <paths name="SFTP-SHTRIH">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="SMARTBAG_SERVER">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="bazarAWS">
         <serverdata>
           <mappings>
@@ -9,7 +23,28 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="localServer">
+      <paths name="localhost">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="new_zoon">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="zoon_ftp">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Тиражи">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

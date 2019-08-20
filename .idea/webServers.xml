@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="07b3434a-de78-4545-958a-de5715f927b0" name="bazarAWS" url="http://54.93.232.99">
+        <fileTransfer host="54.93.232.99" port="22" privateKey="C:\Users\Alexander\Desktop\aws_key\ids.ppk" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
