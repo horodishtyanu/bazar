@@ -5612,7 +5612,7 @@ a {
       bottom: 0;
       width: 1.625rem;
       height: 1.625rem;
-      background: url('/public/landing/build/img/tick.png');
+      background: url('/landing/build/img/tick.png');
       content: "";
       background-size: contain; }
 

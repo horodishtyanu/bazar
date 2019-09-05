@@ -4,12 +4,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainControlelr extends AbstractController
 {
-
     /**
      * @Route(path="/", methods={"GET"})
     **/
@@ -18,6 +18,60 @@ class MainControlelr extends AbstractController
     {
         return $this->render('landing/index.php.twig', ['package' => $this->getPack(), 'dt' => date('Y')]);
     }
+
+    /**
+     * @Route(path="/", methods={"POST"}, name="formHandler")
+     * @param Request $request
+     * @return Response
+     */
+    public function formAction(Request $request):Response
+    {
+        $ret = $request->request->all();
+        return $this->json($this->sendEmail($ret));
+    }
+
+    private function sendEmail($data)
+    {
+        if (isset($data['name'])) {
+            if (!empty($data['name'])){
+                $name = strip_tags($data['name']);
+            }
+        }
+        if (isset($data['email'])) {
+            if (!empty($data['email'])){
+                $email = strip_tags($data['email']);
+            }
+        }
+        if (isset($data['phone'])) {
+            if (!empty($data['phone'])){
+                $phone = strip_tags($data['phone']);
+            }
+        }
+        if (isset($data['question'])) {
+            if (!empty($data['question'])){
+                $question = strip_tags($data['question']);
+            }
+        }
+
+//        $to = "info@digitalbazaar.ru";
+
+        $to = 'horodishtyanu@gmail.com';
+        $sendfrom = "noreply@digitalbazaar.ru";
+        $headers  = "From: " . strip_tags($sendfrom) . "\r\n";
+        $headers .= "Reply-To: ". strip_tags($sendfrom) . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html;charset=utf-8 \r\n";
+        $headers .= "Content-Transfer-Encoding: 8bit \r\n";
+        $subject = "Форма обратной связи с сайта.";
+        $message = "<b>Имя:</b> $name <br>
+                      <b>Email:</b> $email <br>
+                      <b>Телефон:</b> $phone <br>
+                      <b>Тема обращения:</b> $question";
+
+        $send = mail($to, $subject, $message, $headers, '-fnoreply@digitalbazaar.ru');
+        return $send;
+    }
+
 
     private function getPack(){
         $packages = array(

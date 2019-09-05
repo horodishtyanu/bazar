@@ -1,3 +1,4 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+ConnectDBBundle:
+  resource: '@ConnectDBBundle/Resources/config/routes.yml'
+ProductTokenBundle:
+  resource: '@ProductTokenBundle/Resources/config/routes.yml'
