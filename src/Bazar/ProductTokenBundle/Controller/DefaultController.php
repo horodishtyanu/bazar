@@ -2,7 +2,10 @@
 
 namespace App\Bazar\ProductTokenBundle\Controller;
 
+use App\Bazar\ConnectDBBundle\Entity\Order\BSaleOrder;
+use App\Bazar\ConnectDBBundle\Entity\QKey;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,6 +24,8 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/token/checkToken", name="checkToken")
+     * @param Request $request
+     * @return JsonResponse
      */
     public function checkToken(Request $request)
     {
@@ -34,12 +39,15 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/token/auth", name="auth")
+     * @param Request $request
+     * @return JsonResponse
      */
     public function auth(Request $request)
     {
         $requestData = json_decode($request->getContent(), true);
         $errors = [];
         $data = [];
+
         if ($requestData['code'] == '12121212' && $requestData['phone'] == '71231231231') {
             $data = ['auth_token' => $this->authTestKey];
         } else {
@@ -55,35 +63,27 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/token/products", name="products")
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function products(Request $request)
+    public function products(Request $request):JsonResponse
     {
         if ($request->headers->get('auth_token') != $this->authTestKey) {
             return $this->json(['errors' => ['auth_error']], 403);
         }
-
+        $orderRepo = $this->getDoctrine()->getRepository(BSaleOrder::class);
+        $keysRepo = $this->getDoctrine()->getRepository(QKey::class);
+        $keys = $keysRepo->findBy([],[], 4);
         $data = [
-            'hed_token' => $request->headers,
-            'loc_token' => $this->authTestKey,
-            'order' => '545656767',
-            'items' => [
-                [
-                    'order' => '545656767',
-                    'link' => '#dowload',
-                    'name' =>'Название продукта может быть очень длинным'
-                ],
-                [
-                    'order' => '545656767',
-                    'link' => '#dowload',
-                    'name' =>'очень длинное название'
-                ],
-                [
-                    'order' => '545656767',
-                    'link' => '#dowload',
-                    'name' =>'Название продукта может быть очень длинным, в две строки, очень длинное название'
-                ],
-            ],
+            'order' => $keys[0]->getOrderId(),
         ];
+        foreach ($keys as $key){
+            $data['items'][] = [
+                'order' => $key->getOrderId(),
+                'link' => $key->getDownload(),
+                'name' => $key->getProduct()
+            ];
+        }
 
         return $this->json(['data' => $data]);
     }

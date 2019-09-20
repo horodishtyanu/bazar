@@ -2,7 +2,9 @@
 
 namespace App\Bazar\ConnectDBBundle\Entity;
 
+use App\Bazar\ConnectDBBundle\Entity\Order\BSaleOrder;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

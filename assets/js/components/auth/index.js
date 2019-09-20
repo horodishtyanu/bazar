@@ -46,10 +46,12 @@ class Auth extends React.Component {
     }
 
     parseCode(value) {
-        if (!value) return value;
-        const onlyNums = this.clearInt(value);
+        // if (!value) return value;
+        // const onlyNums = this.clearInt(value);
+        //
+        // return onlyNums.slice(0,2);
+        return value.slice(0, 4);
 
-        return onlyNums.slice(0,2);
     }
 
     validate(values) {
