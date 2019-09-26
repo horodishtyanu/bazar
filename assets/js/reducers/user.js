@@ -4,8 +4,8 @@ import Cookies from 'js-cookie';
 
 const initialState = {
     isAuth: false,
-    // token : Cookies.get('token'),
-}
+    token : Cookies.get('token'),
+};
 
 export function userReducer(state = initialState, action) {
     switch (action.type) {

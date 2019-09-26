@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * BSaleOrderPropsValue
  *
  * @ORM\Table(name="b_sale_order_props_value", uniqueConstraints={@ORM\UniqueConstraint(name="IX_SOPV_ORD_PROP_UNI", columns={"ORDER_ID", "ORDER_PROPS_ID"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Bazar\ConnectDBBundle\Repository\Order\BSaleOrderPropsValueRepository")
  */
 class BSaleOrderPropsValue
 {

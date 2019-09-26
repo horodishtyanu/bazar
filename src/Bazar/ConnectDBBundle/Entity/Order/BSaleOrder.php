@@ -2,6 +2,7 @@
 
 namespace App\Bazar\ConnectDBBundle\Entity\Order;
 
+use App\Bazar\ConnectDBBundle\Entity\Basket\BSaleBasket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
@@ -12,6 +13,7 @@ use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 /**
  * BSaleOrder
  *
+ * @property BSaleBasket|object basket
  * @ORM\Table(name="b_sale_order", uniqueConstraints={@ORM\UniqueConstraint(name="IXS_ACCOUNT_NUMBER", columns={"ACCOUNT_NUMBER"})}, indexes={@ORM\Index(name="IX_BSO_DATE_PAY_BEFORE", columns={"DATE_PAY_BEFORE"}), @ORM\Index(name="IX_BSO_DATE_PAYED", columns={"DATE_PAYED"}), @ORM\Index(name="IX_BSO_DATE_CANCELED", columns={"DATE_CANCELED"}), @ORM\Index(name="IX_BSO_DATE_ALLOW_DELIVERY", columns={"DATE_ALLOW_DELIVERY"}), @ORM\Index(name="IXS_XML_ID", columns={"XML_ID"}), @ORM\Index(name="IXS_ORDER_UPDATED_1C", columns={"UPDATED_1C"}), @ORM\Index(name="IXS_ORDER_REC_ID", columns={"RECURRING_ID"}), @ORM\Index(name="IXS_ORDER_PERSON_TYPE_ID", columns={"PERSON_TYPE_ID"}), @ORM\Index(name="IX_BSO_DATE_INSERT", columns={"DATE_INSERT"}), @ORM\Index(name="IX_BSO_CANCELED", columns={"CANCELED"}), @ORM\Index(name="IX_BSO_ALLOW_DELIVERY", columns={"ALLOW_DELIVERY"}), @ORM\Index(name="IXS_ID_1C", columns={"ID_1C"}), @ORM\Index(name="IXS_DATE_UPDATE", columns={"DATE_UPDATE"}), @ORM\Index(name="IXS_SALE_COUNT", columns={"USER_ID", "LID", "PAYED", "CANCELED"}), @ORM\Index(name="IX_SOO_AFFILIATE_ID", columns={"AFFILIATE_ID"}), @ORM\Index(name="IXS_ORDER_STATUS_ID", columns={"STATUS_ID"}), @ORM\Index(name="IXS_ORDER_USER_ID", columns={"USER_ID"})})
  * @ORM\Entity
  */
@@ -546,34 +548,27 @@ class BSaleOrder
 
 
     /**
-     * @var array
+     * @var array|object[]
      */
-    private $orderPropsValue;
-
+    public $orderProps;
 
     /**
-     * @param EntityManagerInterface $em
-     * @return array
+     * @return array|object[]
      */
-    public function getOrderPropsValue(EntityManagerInterface $em)
+    public function getOrderProps()
     {
-        $propsRepo = $em->getRepository(BSaleOrderPropsValue::class);
-        $properties = $propsRepo->findBy(['orderId' => $this->getId()]);
-        $propsResult = [];
-        array_walk($properties, function ($prop) use (&$propsResult){
-            $propsResult[$prop->getCode()] = $prop->getValue();
-        });
-        $this->orderPropsValue = $propsResult;
-        return $this->orderPropsValue;
+        return $this->orderProps;
     }
 
     /**
-     * @param array $orderPropsValue
+     * @param array|object[] $orderProps
      */
-    public function setOrderPropsValue(array $orderPropsValue): void
+    public function setOrderProps($orderProps): void
     {
-        $this->orderPropsValue = $orderPropsValue;
+        $this->orderProps = $orderProps;
     }
+
+
 
     /**
      * @return int

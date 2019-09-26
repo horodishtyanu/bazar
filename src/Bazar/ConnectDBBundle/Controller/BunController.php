@@ -8,6 +8,7 @@ use App\Bazar\ConnectDBBundle\Entity\Basket\BSaleBasket;
 use App\Bazar\ConnectDBBundle\Entity\Order\BSaleOrder;
 use App\Bazar\ConnectDBBundle\Entity\Order\BSaleOrderPropsValue;
 use App\Bazar\ConnectDBBundle\Entity\QKey;
+use App\Bazar\ConnectDBBundle\Helpers\Order;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
@@ -21,12 +22,16 @@ class BunController extends AbstractController
 
     /**
      * @Route(path="/testBun", methods={"GET"})
-    **/
-    public function indexAction():Response
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function indexAction(EntityManagerInterface $em):Response
     {
-        $repo = $this->getDoctrine()->getRepository(QKey::class);
-        $res = $repo->findBy(['distributor' => '9723023366', 'status' => 0]);
-        return $this->json($res);
+        $orderId = new Order($em);
+//        $order = $orderId->getByProp(['CODE' => 'TOKEN', 'VALUE' => '123456789']);
+        $order = $orderId->getById(14925);
+        dd($order);
+        return $this->json($orderId->getOrder());
     }
 
     /**

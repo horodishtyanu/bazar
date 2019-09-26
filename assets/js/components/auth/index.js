@@ -50,7 +50,7 @@ class Auth extends React.Component {
         // const onlyNums = this.clearInt(value);
         //
         // return onlyNums.slice(0,2);
-        return value.slice(0, 4);
+        return value.slice(0, 2);
 
     }
 
