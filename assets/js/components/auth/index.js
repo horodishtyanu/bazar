@@ -50,7 +50,7 @@ class Auth extends React.Component {
         // const onlyNums = this.clearInt(value);
         //
         // return onlyNums.slice(0,2);
-        return value.slice(0, 2);
+        return value.slice(0, 4);
 
     }
 
@@ -73,7 +73,7 @@ class Auth extends React.Component {
                 <div className="activation-logo">
                     <img src="img/logo.svg" alt=""/>
                 </div>
-                <div className="activation-title">Активация сервисного<br/> пакета ORACLE</div>
+                <div className="activation-title">Активация сервисного<br/> пакета</div>
                 <Form onSubmit={this.submitAuth.bind(this)}
                       // initialValues={{ code: ['12','34','56','78'], phone: '7123123123' }}
                       validate={this.validate.bind(this)}

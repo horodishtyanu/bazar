@@ -57,15 +57,9 @@ class DefaultController extends AbstractController
         $requestData = json_decode($request->getContent(), true);
         $errors = [];
         $data = [];
-        $order = [];
-
-        try {
-            $orderClass = new Order($em);
-            $preOrder = $orderClass->getByProp(['code' => 'TOKEN', 'value' => $requestData['code']]);
-            $order = $orderClass->getByProp(['code' => 'PHONE', 'value' => $requestData['phone'], 'orderId' => $preOrder->getId()]);
-        }catch (\Exception $e){
-            $errors[] = 'Order not Found!';
-        }
+        $orderClass = new Order($em);
+        $preOrder = $orderClass->getByProp(['code' => 'TOKEN', 'value' => $requestData['code']]);
+        $order = $orderClass->getByProp(['code' => 'PHONE', 'value' => $requestData['phone'], 'orderId' => $preOrder->getId()]);
 
         if ($order != '') {
             $crypter = new Crypter($this->cryptoKey);
@@ -95,21 +89,22 @@ class DefaultController extends AbstractController
         $crypt = new Crypter($this->cryptoKey);
         $key = $session->get('authKey');
         $orderId = $crypt->decrypt($key);
-        dd($orderId);
         if ($request->headers->get('auth_token') != $key) {
             return $this->json(['errors' => ['auth_error']], 403);
         }
         $order = new Order($em);
+        $order = $order->getById($orderId);
+        $items = $order->basket;
         $data = [
-            'order' => $order,
+            'order' => $order->getId(),
         ];
-//        foreach ($keys as $key){
-//            $data['items'][] = [
-//                'order' => $key->getOrderId(),
-//                'link' => $key->getDownload(),
-//                'name' => $key->getProduct()
-//            ];
-//        }
+        foreach ($items as $item){
+            $data['items'][] = [
+                'order' => $item->getProductXmlId(),
+                'link' => $item->getBasePrice(),
+                'name' => $item->getName()
+            ];
+        }
 
         return $this->json(['data' => $data]);
     }
