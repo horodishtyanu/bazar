@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +20,7 @@ class DefaultController extends AbstractController
     protected $authKey;
     private $cryptoKey = 'QH9O9v9D';
     /**
-     * @Route("/tokenactivate", name="main")
+     * @Route("/lk", name="main")
      */
     public function index()
     {
@@ -107,5 +108,24 @@ class DefaultController extends AbstractController
         }
 
         return $this->json(['data' => $data]);
+    }
+
+
+    /**
+     * @Route(path="/choice", name="choice")
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response
+     */
+    public function choice(Request $request, SessionInterface $session)
+    {
+
+        //        $crypt = new Crypter($this->cryptoKey);
+//        $key = $session->get('authKey');
+//        $orderId = $crypt->decrypt($key);
+//        if ($request->headers->get('auth_token') != $key) {
+//            return $this->json(['errors' => ['auth_error']], 403);
+//        }
+        return $this->render("tokenActivate/choice.html.twig");
     }
 }

@@ -63,6 +63,23 @@ const ClientApi =  class ClientApi {
         return result;
     }
 
+    async choice()
+    {
+
+        let result = {
+            needAuth:false
+        };
+        try {
+            let data = await superagent.get(this.url + 'choice').ok(res => res.status < 500);
+            if (data.status === 403)
+                result.needAuth = true;
+            result = data.body.data;
+        }catch (e) {
+            console.log(e)
+        }
+        return result;
+    }
+
     getResponseData(res) {
         return res.body.data;
     }

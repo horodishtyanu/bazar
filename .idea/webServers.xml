@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="07b3434a-de78-4545-958a-de5715f927b0" name="bazarAWS (project level)" url="http://54.93.232.99">
-        <fileTransfer host="54.93.232.99" port="22" privateKey="C:\Users\Alexander\Desktop\aws_key\ids.ppk" accessType="SFTP" keyPair="true">
+      <webServer id="07b3434a-de78-4545-958a-de5715f927b0" name="bazarAWS (project level)" url="http://18.195.193.22">
+        <fileTransfer host="18.195.193.22" port="22" privateKey="$USER_HOME$/aws_key/ids.ppk" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Auth from "../components/auth";
 import Products from '../components/pages/products';
+import Choice from "../components/pages/choice";
 import {checkToken, loginPost} from '../actions/loginActions'
 import {productLoad} from "../actions/productActions";
 
@@ -26,6 +27,7 @@ const mapStateToProps = store => {
         showAuthForm: !store.user.isAuth && !store.user.token,
         isAuth: store.user.isAuth,
         products: store.products,
+        choice: store.choice,
     }
 };
 

@@ -1,0 +1,66 @@
+{% extends "tokenActivate/base.html.twig" %}
+
+{% block title %}Выбор продукта!{% endblock %}
+
+{% block body %}
+
+    <div class="activation-body">
+        <div class="activation-title">Выберите программы</div>
+        <div class="activation-widget">
+            <div class="activation-widget-block">
+                <div class="activation-radios">
+                    <div class="activation-radios__title">Антивирусы</div>
+                    <ul class="radios-list">
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-1" id="radio-id-1">
+                                <label for="radio-id-1" class="radio-label">Выбор несколько антивирусов</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-1" id="radio-id-2">
+                                <label for="radio-id-2" class="radio-label">Выбор несколько антивирусов, через запятую в две строки</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="activation-radios">
+                    <div class="activation-radios__title">Мультимедиапродукты</div>
+                    <ul class="radios-list">
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-2" id="radio-id-3">
+                                <label for="radio-id-3" class="radio-label">Выбор несколько антивирусов</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-2" id="radio-id-4">
+                                <label for="radio-id-4" class="radio-label">Выбор несколько антивирусов, через запятую в две строки</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="activation-radios">
+                    <div class="activation-radios__title">Компьютерные сервисы</div>
+                    <ul class="radios-list">
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-3" id="radio-id-5">
+                                <label for="radio-id-5" class="radio-label">Выбор несколько антивирусов</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="radio-block">
+                                <input type="radio" class="radio" name="name-3" id="radio-id-6">
+                                <label for="radio-id-6" class="radio-label">Выбор несколько антивирусов, через запятую в две строки</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
